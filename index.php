@@ -1084,7 +1084,6 @@
 	        }
 	      });
 	    },
-	    minLength: 2 // Minimum number of characters required to trigger autocomplete
 	  });
 	});
 
