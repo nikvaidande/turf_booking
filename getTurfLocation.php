@@ -202,7 +202,7 @@ if($_GET['search_location']){
                                 <p class="card-text">Description : <?php echo $row['description']; ?></p>
                                 <p class="card-text">Call to Manager : <a href="tel:<?php echo $row['contact_number']; ?>"><?php echo $row['contact_number']; ?></a></p>
                                 <p class="card-text" style="display: flex; float: right; margin-right: 50%;">Fees : <?php echo $row['amount']; ?> ₹ / Hr</p>
-                                <a href="#" class="btn btn-primary">Book Now</a>
+                                <a href="booking.php?booking_for=<?php echo base64_encode($row['id']) ?>" class="btn btn-primary">Book Now</a>
                             </div>
                         </div>
                     </div>

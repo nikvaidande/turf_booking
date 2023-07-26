@@ -16,6 +16,22 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
+    <?php
+        include ("database.php" );
+
+
+        if($_GET['booking_for']){
+            $booking_for = base64_decode($_GET['booking_for']);
+            // echo $_GET['booking_for']; exit;
+            $today = date('Y-m-d');
+             
+            $sql = "SELECT * FROM booking where booking_for = '$booking_for' AND booking_date = '$today'";
+            $result = mysqli_query($conn,$sql);    
+        }else{
+            echo '<h1>Please contact administer</h1>'; exit;
+        }
+        
+    ?>
     <div class="container-fluid" style="margin-top:30px !important;">
         <div class="container">
             <div class="row mb-2">
@@ -43,6 +59,10 @@
                             <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter Phone Number" maxlength="10" pattern="\d*">
                         </div>
                         <div class="form-group mt-2">
+                            <label>Player Count</label>
+                            <input type="text" class="form-control" id="player_count" name="player_count" placeholder="Enter Player Count" maxlength="10" pattern="\d*">
+                        </div>
+                        <div class="form-group mt-2">
                             <label>Booking Date</label>
                             <input type="text" class="form-control" id="booking_date" name="booking_date" placeholder="Enter Booking Date">
                         </div>
@@ -54,16 +74,13 @@
                             <label>End Time</label>
                             <input type="time" class="form-control" id="end_time" name="end_time" placeholder="Enter Phone Number">
                         </div>
+                        <input type="hidden" name="booking_for" id="booking_for" value="<?php echo $_GET['booking_for']; ?>">
                         <button type="submit" class="btn btn-primary mt-2" id="submit">Submit</button>
                     </form>
                 </div>
             </div>
 
-            <?php
-                include ("database.php" ); 
-                $sql = "SELECT * FROM booking";
-                $result = mysqli_query($conn,$sql);
-            ?>
+
 
             <table id="tblUser">
                 <thead>
@@ -130,10 +147,12 @@
             var booking_date = $('#booking_date').val();
             var start_time = $('#start_time').val();
             var end_time = $('#end_time').val();
+            var booking_for = $('#booking_for').val();
+            var player_count = $('#player_count').val();
             $.ajax({
                 url : "add_booking.php",
                 type : "POST",
-                data : {name:name,mobile:mobile,booking_date:booking_date,start_time:start_time,end_time:end_time},
+                data : {name:name,mobile:mobile,booking_date:booking_date,start_time:start_time,end_time:end_time,booking_for:booking_for,player_count:player_count},
                 success : function(data){
                     alert("Data Inserted Successfully");
                     $("#form-body").hide();

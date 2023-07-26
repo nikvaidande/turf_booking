@@ -26,7 +26,8 @@ array(
 'db'        => 'id',
 'dt'        => 7, 
 'formatter' => function( $d, $row ) { 
-return '<a href="javascript:void(0)" class="btn btn-primary btn-edit" data-id="'.$row['id'].'"> Edit </a>'; 
+return '<a href="javascript:void(0)" class="btn btn-primary btn-edit" data-id="'.$row['id'].'"> Edit </a>
+		<a href="./client/index.php?booking_for='.base64_encode($row['id']).'" class="btn btn-primary">Link </a>'; 
 } 
 ) 
 ); 
