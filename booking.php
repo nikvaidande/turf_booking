@@ -48,13 +48,16 @@
                         <input type="text" class="form-control" id="booking_date" name="booking_date" placeholder="Enter Booking Date">
                     </div>
                     <div class="form-group mt-2">
-                        <label>Start Time</label>
-                        <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Enter Phone Number">
+                        <label>Select Available Slot</label>
+                        <select class="form-control" id="available_slot" name="available_slot">
+                            <option>Select Slot</option>
+                        </select>
+                        <!-- <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Enter Phone Number"> -->
                     </div>
-                    <div class="form-group mt-2">
+                    <!-- <div class="form-group mt-2">
                         <label>End Time</label>
                         <input type="time" class="form-control" id="end_time" name="end_time" placeholder="Enter Phone Number">
-                    </div>
+                    </div> -->
                     <input type="hidden" name="booking_for" id="booking_for" value="<?php echo $_GET['booking_for']; ?>">
                     <button type="submit" class="btn btn-primary mt-2" id="submit">Submit</button>
                 </form>
@@ -69,8 +72,40 @@
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+     <script>
+        $(document).ready(function(){
+        //create date pickers
+            $("#booking_date").datepicker(
+            { 
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(booking_date)
+                {
+                    var booking_date = $(this).val();
+                    var booking_for = $('#booking_for').val();
+                    // console.log(booking_date);
+                    $.ajax({
+                        type:"POST",
+                        url:"get_booking_slot.php",
+                        data : {booking_date:booking_date, booking_for:booking_for},
+                        success: function(result)
+                        {
+                            // console.log(result);
+                            $('#available_slot').html(result);
+                              // document.write(result);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
+        $('#booking_date').datepicker({
+            dateFormat: 'yy-mm-dd' // Set the desired date format
+        });
+
     	$(document).ready(function(){
 			var booking_for = $('#booking_for').val();
 			$.ajax({
@@ -83,6 +118,6 @@
 				}
 			})
 		});
-    </script>
+    </script> -->
 </body>
 </html>
