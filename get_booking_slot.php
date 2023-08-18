@@ -38,19 +38,20 @@
 		    	$slot_start_time = date('h:i a', strtotime($slot['slot_start_time'])); 
 				$slot_end_time = date('h:i a', strtotime($slot['slot_end_time'])); 
 				$timeFormat = $slot_start_time .' - '. $slot_end_time;
+				$valueTime = $slot['slot_start_time'];
 
-		    	$slot_sql = "SELECT * FROM booking where booking_for = '$booking_for' AND booking_date = '$booking_date'";
+		    	$slot_sql = "SELECT booking_time FROM booking where booking_for = '$booking_for' AND booking_date = '$booking_date'";
 		    	$result = $conn->query($slot_sql); 
-		    	if ($result->num_rows > 0) {
-				  	while($row = $result->fetch_assoc()) {
-					   // $data['id']    = $row['id']; 
-					   $data['booking_time'] = $row['booking_time'];
-					}
-					
+		    	while($row = $result->fetch_assoc()) {
+				   // $data['id']    = $row['id']; 
+				   $rows[] = $row;
 				}
-				if($data['booking_time'] != $timeFormat){
-					$html = '<option value = '.$timeFormat.'>'.$timeFormat.'</option>';
-					echo $html;
+				// echo "</pre>"; print_r($rows); exit;
+				if($rows != $valueTime){
+					// $html = '<option value = '.$valueTime.'>'.$timeFormat.'</option>';
+					echo "<div class='col-md-3'><input type='checkbox' class='btn-check' id='slot".$valueTime."' value=".$valueTime."><label class='btn btn-outline-primary' for='slot".$valueTime."'>".$timeFormat."</label></div>";
+					// echo "<li class='nav-item p-3'><a class='nav-link active' href='#'>".$timeFormat."</a></li>";
+					// echo  "<li class='active'><a href='#'>".$timeFormat."</a></li>";
 				}
 			}
 		}

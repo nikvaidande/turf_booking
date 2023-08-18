@@ -49,9 +49,11 @@
                     </div>
                     <div class="form-group mt-2">
                         <label>Select Available Slot</label>
-                        <select class="form-control" id="available_slot" name="available_slot">
+                        <div class="row" id="available_slot" name="available_slot"></div>
+                        <!-- <ul class="nav nav-pills" id="available_slot" name="available_slot"></ul> -->
+                        <!-- <select class="form-control" id="available_slot" name="available_slot">
                             <option>Select Slot</option>
-                        </select>
+                        </select> -->
                         <!-- <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Enter Phone Number"> -->
                     </div>
                     <!-- <div class="form-group mt-2">
@@ -99,6 +101,35 @@
                 }
             });
         });
+
+        jQuery(document).ready(function($) {
+            
+            $("#submit").on('click',function(e){
+                e.preventDefault();
+
+                var name = $('#name').val();
+                var mobile = $('#mobile').val();
+                var booking_date = $('#booking_date').val();
+                var start_time = $('#start_time').val();
+                var end_time = $('#end_time').val();
+                var booking_time = $('#available_slot').val();
+                var booking_for = $('#booking_for').val();
+                var player_count = $('#player_count').val();
+                var mode = '1';
+                $.ajax({
+                    url : "client/add_booking.php",
+                    type : "POST",
+                    data : {name:name,mobile:mobile,booking_date:booking_date,start_time:start_time,end_time:end_time,booking_for:booking_for,player_count:player_count,mode:mode,booking_time:booking_time},
+                    success : function(data){
+                        alert("Data Inserted Successfully");
+                        $("#form-body").hide();
+                        location.reload(true);
+                    }
+                });
+
+            });
+
+        } );
     </script>
 
     <!-- <script type="text/javascript">
