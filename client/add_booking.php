@@ -16,11 +16,17 @@
 
     $bookingId = round(microtime(true));
 
-    $sql = "INSERT INTO booking(booking_id,booking_for,name,mobile,player_count,booking_date,start_time,end_time,booking_time,booking_mode) VALUES ('$bookingId','$booking_for','$name','$mobile','$player_count','$booking_date','$start_time','$end_time','$booking_time','$booking_mode')";
-    // $result = $conn->query($sql);
-    if ($conn->query($sql) === TRUE) {
-      echo json_encode(true);
-    } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+    $booking_time_array = explode(", ", $booking_time);
+
+   // print_r($booking_time_array);
+
+    foreach($booking_time_array as $slot){
+      $sql = "INSERT INTO booking(booking_id,booking_for,name,mobile,player_count,booking_date,start_time,end_time,booking_time,booking_mode) VALUES ('$bookingId','$booking_for','$name','$mobile','$player_count','$booking_date','$start_time','$end_time','$slot','$booking_mode')";
+      // $result = $conn->query($sql);
+      if ($conn->query($sql) === TRUE) {
+        echo json_encode(true);
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
     }
 ?>

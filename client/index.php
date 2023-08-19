@@ -68,9 +68,10 @@
                         </div>
                         <div class="form-group mt-2">
                             <label>Select Available Slot</label>
-                            <select class="form-control" id="available_slot" name="available_slot">
-                                <option>Select Slot</option>
-                            </select>
+                            <div class="row" id="available_slot" name="available_slot"></div>
+                            <div id="selectedSlots" class="mt-2">
+                                Selected Slots: <span id="selectedSlotsOutput"></span>
+                            </div>
                             <!-- <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Enter Phone Number"> -->
                         </div>
                         <input type="hidden" name="booking_for" id="booking_for" value="<?php echo $_GET['booking_for']; ?>">
@@ -87,8 +88,8 @@
                     <th>Name</th>
                     <th>Contact no</th>
                     <th>Booking Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <th>Booking Time</th>
+                    <!-- <th>End Time</th> -->
                     <th>Action</th>
                 </thead>
                 <tbody>
@@ -105,8 +106,8 @@
                             <td><?php echo $booking['name']; ?></td>
                             <td><?php echo $booking['mobile']; ?></td>
                             <td><?php echo $booking['booking_date']; ?></td>
-                            <td><?php echo $booking['start_time']; ?></td>
-                            <td><?php echo $booking['end_time']; ?></td>
+                            <td><?php echo $booking['booking_time']; ?></td>
+                            <!-- <td><?php echo $booking['end_time']; ?></td> -->
                             <td>
                                 <a href="edit_booking.php?id=<?php echo $booking['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>
                             </td>
@@ -173,14 +174,24 @@
             var booking_date = $('#booking_date').val();
             var start_time = $('#start_time').val();
             var end_time = $('#end_time').val();
-            var booking_time = $('#available_slot').val();
+            var booking_time = $('#booking_slots').val();
             var booking_for = $('#booking_for').val();
             var player_count = $('#player_count').val();
             var mode = '0';
             $.ajax({
                 url : "add_booking.php",
                 type : "POST",
-                data : {name:name,mobile:mobile,booking_date:booking_date,start_time:start_time,end_time:end_time,booking_for:booking_for,player_count:player_count,mode:mode,booking_time:booking_time},
+                data : {
+                            name:name,
+                            mobile:mobile,
+                            booking_date:booking_date,
+                            start_time:start_time,
+                            end_time:end_time,
+                            booking_for:booking_for,
+                            player_count:player_count,
+                            mode:mode,
+                            booking_time:booking_time
+                },
                 success : function(data){
                     alert("Data Inserted Successfully");
                     $("#form-body").hide();

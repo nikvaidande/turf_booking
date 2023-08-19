@@ -47,19 +47,14 @@
                         <label>Booking Date</label>
                         <input type="text" class="form-control" id="booking_date" name="booking_date" placeholder="Enter Booking Date">
                     </div>
+          
                     <div class="form-group mt-2">
                         <label>Select Available Slot</label>
                         <div class="row" id="available_slot" name="available_slot"></div>
-                        <!-- <ul class="nav nav-pills" id="available_slot" name="available_slot"></ul> -->
-                        <!-- <select class="form-control" id="available_slot" name="available_slot">
-                            <option>Select Slot</option>
-                        </select> -->
-                        <!-- <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Enter Phone Number"> -->
+                        <div id="selectedSlots" class="mt-2">
+                            Selected Slots: <span id="selectedSlotsOutput"></span>
+                        </div>
                     </div>
-                    <!-- <div class="form-group mt-2">
-                        <label>End Time</label>
-                        <input type="time" class="form-control" id="end_time" name="end_time" placeholder="Enter Phone Number">
-                    </div> -->
                     <input type="hidden" name="booking_for" id="booking_for" value="<?php echo $_GET['booking_for']; ?>">
                     <button type="submit" class="btn btn-primary mt-2" id="submit">Submit</button>
                 </form>
@@ -112,14 +107,24 @@
                 var booking_date = $('#booking_date').val();
                 var start_time = $('#start_time').val();
                 var end_time = $('#end_time').val();
-                var booking_time = $('#available_slot').val();
+                var booking_time = $('#booking_slots').val();
                 var booking_for = $('#booking_for').val();
                 var player_count = $('#player_count').val();
                 var mode = '1';
                 $.ajax({
                     url : "client/add_booking.php",
                     type : "POST",
-                    data : {name:name,mobile:mobile,booking_date:booking_date,start_time:start_time,end_time:end_time,booking_for:booking_for,player_count:player_count,mode:mode,booking_time:booking_time},
+                    data : {
+                            name:name,
+                            mobile:mobile,
+                            booking_date:booking_date,
+                            start_time:start_time,
+                            end_time:end_time,
+                            booking_for:booking_for,
+                            player_count:player_count,
+                            mode:mode,
+                            booking_time:booking_time
+                    },
                     success : function(data){
                         alert("Data Inserted Successfully");
                         $("#form-body").hide();

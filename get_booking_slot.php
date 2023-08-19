@@ -4,14 +4,35 @@
     if($_POST['booking_for']){
     	$booking_date = $_POST['booking_date'];
         $booking_for = base64_decode($_POST['booking_for']);
-        // echo $_GET['booking_for']; exit;
+        // echo $booking_for; exit;
         $today = date('Y-m-d');
          
         $sql = "SELECT * FROM turf_details where id = '$booking_for'";
         $getslot = $conn->query($sql);
-        if ($getslot->num_rows > 0) {
+		//echo "<pre>";
+		//print_r($getslot);
+
+
+		//getting all previouly book data from db
+		$slot_sql = "SELECT booking_time FROM booking where booking_for = '$booking_for' AND booking_date = '$booking_date'";
+		$result = $conn->query($slot_sql); 
+		$booking_data = [];
+		while($row = $result->fetch_assoc()) {
+			$booking_data[] = $row['booking_time'];
+		} 
+
+		//  echo "<pre>";
+		//  print_r($booking_data); exit;
+
+
+		echo '<select id="selectSlots" class="form-control" multiple>';
+        
+		 if ($getslot->num_rows > 0) {
         	// $getSlotData = array();
 		  	while($row = $getslot->fetch_assoc()) {
+
+				//echo "<pre>";
+				//print_r($row);
 			   $start_time = $row['open_time'];
 			   $end_time = $row['close_time'];
 
@@ -37,26 +58,33 @@
 			foreach($time as $slot){
 		    	$slot_start_time = date('h:i a', strtotime($slot['slot_start_time'])); 
 				$slot_end_time = date('h:i a', strtotime($slot['slot_end_time'])); 
-				$timeFormat = $slot_start_time .' - '. $slot_end_time;
+			 	$timeFormat = $slot_start_time .' - '. $slot_end_time;
 				$valueTime = $slot['slot_start_time'];
-
-		    	$slot_sql = "SELECT booking_time FROM booking where booking_for = '$booking_for' AND booking_date = '$booking_date'";
-		    	$result = $conn->query($slot_sql); 
-		    	while($row = $result->fetch_assoc()) {
-				   // $data['id']    = $row['id']; 
-				   $rows[] = $row;
-				}
-				// echo "</pre>"; print_r($rows); exit;
-				if($rows != $valueTime){
-					// $html = '<option value = '.$valueTime.'>'.$timeFormat.'</option>';
-					echo "<div class='col-md-3'><input type='checkbox' class='btn-check' id='slot".$valueTime."' value=".$valueTime."><label class='btn btn-outline-primary' for='slot".$valueTime."'>".$timeFormat."</label></div>";
-					// echo "<li class='nav-item p-3'><a class='nav-link active' href='#'>".$timeFormat."</a></li>";
-					// echo  "<li class='active'><a href='#'>".$timeFormat."</a></li>";
+				if (in_array($valueTime, $booking_data)) {
+				}else{
+				    // echo "<div class='col-md-3'>
+					// 		<input type='checkbox' class='btn-check' id='slot".$valueTime."' value=".$valueTime.">
+					// 		<label class='btn btn-outline-primary' for='slot".$valueTime."'>".$timeFormat."</label>
+					// 	</div>";
+					echo "<option value=".$valueTime.">".$timeFormat."</option>";
 				}
 			}
 		}
     }else{
-        echo '<h1>Please contact administer</h1>'; exit;
+        echo '<option>Please contact administer</option>'; exit;
     }
+		echo '<input type="hidden" id="booking_slots" name="booking_slots" value="">';
+		echo '<input type="hidden" id="start_time" name="start_time" value="'.$startTime.'">';
+		echo '<input type="hidden" id="end_time" name="end_time" value="'.$endTime.'">';
+		echo '</select>';
     
 ?>
+  <script>
+        $(document).ready(function() {
+            $("#selectSlots").change(function() {
+                var selectedSlots = $("#selectSlots").val();
+                $("#selectedSlotsOutput").text(selectedSlots.join(", "));
+				$("#booking_slots").val(selectedSlots.join(", "));
+            });
+        });
+    </script>
