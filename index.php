@@ -19,18 +19,18 @@
 	<link rel="alternate" type="text/xml+oembed" href="https://tuscany.wprentals.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftuscany.wprentals.org%2F&amp;format=xml" />
 	
 	<link rel="stylesheet" type="text/css" media="screen"href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link href="./css/base.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="./css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
-        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 
-        <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
-		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 	<style type='text/css'>
 
 	    #search_wrapper {
@@ -908,6 +908,7 @@
 	}
 	.content_wrapper{min-height: auto !important;}
 	.wa-chat-box-poweredby {display: none;}
+	.gj-timepicker-bootstrap [role=right-icon] button .gj-icon {top: 20px !important;}
 	</style>
 	<meta name="generator" content="Elementor 3.13.4; features: e_dom_optimization, e_optimized_assets_loading, e_optimized_css_loading, a11y_improvements, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
 	<link rel="icon" href="https://tuscany.b-cdn.net/wp-content/uploads/2022/01/tuscany-favicon-60x60.png" sizes="32x32" />
@@ -916,6 +917,11 @@
 	<meta name="msapplication-TileImage" content="http://tuscany.b-cdn.net/wp-content/uploads/2022/01/tuscany-favicon.png" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<!-- <script type="text/javascript" src="bootstrap-datepicker.de.js" charset="UTF-8"></script> -->
+
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body class="home page-template page-template-elementor_header_footer page page-id-35371  top_bar_on elementor-default elementor-template-full-width elementor-kit-8 elementor-page elementor-page-35371" >
@@ -967,6 +973,18 @@
 							         $(function () {
 							             $('#datetimepicker4').datepicker();
 							         });
+							    </script>
+							</div>
+							<div class="elementor-field-group elementor-column form-group elementor-field-group-message elementor-col-100">
+								<label for="form-field-message" class="elementor-field-label elementor-screen-only">Check In</label>
+								<div class="elementor_search_builder_field_wrapper">
+									<!-- <i aria-hidden="true" class="far fa-calendar-alt"></i> -->
+									<input type='text' class="form-control" placeholder="Please Select Time" id='timepicker' required/>
+								</div>
+								<script>
+							        $('#timepicker').timepicker({
+							            uiLibrary: 'materialdesign',format: 'hh:mm'
+							        });
 							    </script>
 							</div>
 							<div class="elemenentor_submit_wrapper elementor-field-group form-group  elementor-column elementor-col-100" >
