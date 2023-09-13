@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <?php
@@ -40,7 +44,7 @@
                 </div>
                 <div class="col-md-3">
                     <button type="button" id="insert-btn" class="btn btn-primary" style="float: right;">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Booking
                     </button>
                 </div>
             </div>
@@ -106,7 +110,8 @@
                             <td><?php echo $booking['name']; ?></td>
                             <td><?php echo $booking['mobile']; ?></td>
                             <td><?php echo $booking['booking_date']; ?></td>
-                            <td><?php echo $booking['booking_time']; ?></td>
+                            <td><?php echo date('h:i a', strtotime($booking['booking_time']));
+ ?></td>
                             <!-- <td><?php echo $booking['end_time']; ?></td> -->
                             <td>
                                 <a href="edit_booking.php?id=<?php echo $booking['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>
@@ -125,6 +130,8 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
     jQuery(document).ready(function($) {
         
@@ -193,9 +200,18 @@
                             booking_time:booking_time
                 },
                 success : function(data){
-                    alert("Data Inserted Successfully");
-                    $("#form-body").hide();
-                    location.reload(true);
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Congratulations!',
+                      text: 'Your Booking is confirm.',
+                      // footer: '<a href="">Why do I have this issue?</a>'
+                    }).then(function() {
+                        $("#form-body").hide();
+                        location.reload(true);
+                        // window.location = "index.php";
+                    });
+                    // alert("Data Inserted Successfully");
+                    
                 }
             });
 

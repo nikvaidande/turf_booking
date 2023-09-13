@@ -7,8 +7,8 @@
     $name = $_POST['name'];
     $mobile = $_POST['mobile'];
     $booking_date = $_POST['booking_date'];
-    $start_time = $_POST['start_time'];
-    $end_time = $_POST['end_time'];
+    // $start_time = $_POST['start_time'];
+    // $end_time = $_POST['end_time'];
     $booking_time = $_POST['booking_time'];
     $player_count = $_POST['player_count'];
     $booking_mode = $_POST['mode'];
@@ -21,7 +21,7 @@
    // print_r($booking_time_array);
 
     foreach($booking_time_array as $slot){
-      $sql = "INSERT INTO booking(booking_id,booking_for,name,mobile,player_count,booking_date,start_time,end_time,booking_time,booking_mode) VALUES ('$bookingId','$booking_for','$name','$mobile','$player_count','$booking_date','$start_time','$end_time','$slot','$booking_mode')";
+      $sql = "INSERT INTO booking(booking_id,booking_for,name,mobile,player_count,booking_date,booking_time,booking_mode) VALUES ('$bookingId','$booking_for','$name','$mobile','$player_count','$booking_date','$slot','$booking_mode')";
       // $result = $conn->query($sql);
       if ($conn->query($sql) === TRUE) {
         echo json_encode(true);

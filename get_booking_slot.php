@@ -25,7 +25,7 @@
 		//  print_r($booking_data); exit;
 
 
-		echo '<select id="selectSlots" class="form-control" multiple>';
+		echo '<select id="selectSlots" class="js-example-basic-multiple" multiple="multiple">';
         
 		 if ($getslot->num_rows > 0) {
         	// $getSlotData = array();
@@ -80,6 +80,9 @@
     
 ?>
   <script>
+  		$(document).ready(function() {
+		    $('.js-example-basic-multiple').select2();
+		});
         $(document).ready(function() {
             $("#selectSlots").change(function() {
                 var selectedSlots = $("#selectSlots").val();

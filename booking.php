@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />    
 </head>
 <body>
 	<div class="container">
@@ -69,6 +73,8 @@
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
      <script>
         $(document).ready(function(){
         //create date pickers
@@ -126,9 +132,17 @@
                             booking_time:booking_time
                     },
                     success : function(data){
-                        alert("Data Inserted Successfully");
-                        $("#form-body").hide();
-                        location.reload(true);
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Congratulations!',
+                          text: 'Your Booking is confirm.',
+                          // footer: '<a href="">Why do I have this issue?</a>'
+                        }).then(function() {
+                            window.location = "index.php";
+                        });
+                        // alert("Data Inserted Successfully");
+                        // $("#form-body").hide();
+                        // location.reload(true);
                     }
                 });
 

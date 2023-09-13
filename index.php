@@ -975,10 +975,9 @@
 							         });
 							    </script>
 							</div>
-							<div class="elementor-field-group elementor-column form-group elementor-field-group-message elementor-col-100">
+							<!-- <div class="elementor-field-group elementor-column form-group elementor-field-group-message elementor-col-100">
 								<label for="form-field-message" class="elementor-field-label elementor-screen-only">Check In</label>
 								<div class="elementor_search_builder_field_wrapper">
-									<!-- <i aria-hidden="true" class="far fa-calendar-alt"></i> -->
 									<input type='text' class="form-control" placeholder="Please Select Time" id='timepicker' required/>
 								</div>
 								<script>
@@ -986,7 +985,7 @@
 							            uiLibrary: 'materialdesign',format: 'hh:mm'
 							        });
 							    </script>
-							</div>
+							</div> -->
 							<div class="elemenentor_submit_wrapper elementor-field-group form-group  elementor-column elementor-col-100" >
 								<button name="submit" type="submit" class="advanced_search_submit_button  button_with_text_wprentals "  value="Search now">Search</button>
 							</div>
